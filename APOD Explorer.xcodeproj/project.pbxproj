@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B509F152505EDBE00D5B2E1 /* Astronomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B509F142505EDBE00D5B2E1 /* Astronomy.swift */; };
+		7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B509F162506ECB700D5B2E1 /* FavoritesController.swift */; };
 		7BF1DA872505EA8900126BA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA862505EA8900126BA7 /* AppDelegate.swift */; };
 		7BF1DA892505EA8900126BA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */; };
 		7BF1DA8B2505EA8900126BA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA8A2505EA8900126BA7 /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B509F142505EDBE00D5B2E1 /* Astronomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astronomy.swift; sourceTree = "<group>"; };
+		7B509F162506ECB700D5B2E1 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		7BF1DA832505EA8900126BA7 /* APOD Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APOD Explorer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF1DA862505EA8900126BA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +88,9 @@
 				7BF1DA862505EA8900126BA7 /* AppDelegate.swift */,
 				7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */,
 				7BF1DA8A2505EA8900126BA7 /* ViewController.swift */,
+				7B509F142505EDBE00D5B2E1 /* Astronomy.swift */,
 				7BF1DA8C2505EA8900126BA7 /* Main.storyboard */,
+				7B509F162506ECB700D5B2E1 /* FavoritesController.swift */,
 				7BF1DA922505EA8B00126BA7 /* Assets.xcassets */,
 				7BF1DA942505EA8B00126BA7 /* LaunchScreen.storyboard */,
 				7BF1DA972505EA8B00126BA7 /* Info.plist */,
@@ -205,8 +211,10 @@
 			files = (
 				7BF1DA8B2505EA8900126BA7 /* ViewController.swift in Sources */,
 				7BF1DA872505EA8900126BA7 /* AppDelegate.swift in Sources */,
+				7B509F152505EDBE00D5B2E1 /* Astronomy.swift in Sources */,
 				7BF1DA912505EA8900126BA7 /* APOD_Explorer.xcdatamodeld in Sources */,
 				7BF1DA892505EA8900126BA7 /* SceneDelegate.swift in Sources */,
+				7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
