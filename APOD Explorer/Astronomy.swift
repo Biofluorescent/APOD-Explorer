@@ -14,4 +14,5 @@ struct Astronomy: Codable {
     var media_type: String
     var title: String
     var url: String
+    var copyright: String?
 }
