@@ -60,39 +60,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoE-Uh-qR7">
-                                <rect key="frame" x="0.0" y="637" width="414" height="176"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoE-Uh-qR7">
+                                <rect key="frame" x="0.0" y="584" width="414" height="229"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="229" id="jcF-l5-zrm"/>
+                                </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RC0-RL-AQR">
-                                <rect key="frame" x="206" y="604" width="208" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bAV-zu-Usy">
+                                <rect key="frame" x="43" y="542" width="101" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="66u-tn-X6T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Hf4-SZ-kfe">
+                                <rect key="frame" x="0.0" y="88" width="414" height="447"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RC0-RL-AQR">
+                                <rect key="frame" x="414" y="548" width="0.0" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bAV-zu-Usy">
-                                <rect key="frame" x="47" y="584" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hf4-SZ-kfe">
-                                <rect key="frame" x="0.0" y="88" width="414" height="447"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="centerX" secondItem="eOO-DB-Ah7" secondAttribute="centerX" id="5pp-97-dl0"/>
+                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="top" secondItem="ENT-x4-mnw" secondAttribute="top" id="ALQ-RV-7lL"/>
+                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="leading" secondItem="qoE-Uh-qR7" secondAttribute="leading" id="LjS-N4-1Fy"/>
+                            <constraint firstItem="bAV-zu-Usy" firstAttribute="bottom" secondItem="RC0-RL-AQR" secondAttribute="bottom" id="Q7g-Lg-xND"/>
+                            <constraint firstItem="RC0-RL-AQR" firstAttribute="trailing" secondItem="qoE-Uh-qR7" secondAttribute="trailing" id="QWx-iR-pQy"/>
+                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="leading" secondItem="ENT-x4-mnw" secondAttribute="leading" id="QeN-vw-rVl"/>
+                            <constraint firstItem="bAV-zu-Usy" firstAttribute="baseline" secondItem="RC0-RL-AQR" secondAttribute="firstBaseline" id="Ram-8b-8Il"/>
+                            <constraint firstItem="bAV-zu-Usy" firstAttribute="top" secondItem="Hf4-SZ-kfe" secondAttribute="bottom" constant="7" id="SA9-bl-Sh3"/>
+                            <constraint firstItem="qoE-Uh-qR7" firstAttribute="bottom" secondItem="ENT-x4-mnw" secondAttribute="bottom" id="bEo-RJ-MD8"/>
+                            <constraint firstItem="qoE-Uh-qR7" firstAttribute="top" secondItem="bAV-zu-Usy" secondAttribute="bottom" constant="8" id="eLt-sb-Rba"/>
+                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="trailing" secondItem="RC0-RL-AQR" secondAttribute="trailing" id="mDt-FL-crS"/>
+                            <constraint firstItem="bAV-zu-Usy" firstAttribute="leading" secondItem="ENT-x4-mnw" secondAttribute="leading" constant="43" id="qsE-wE-Yce"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ENT-x4-mnw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Today" id="Wqq-fb-DGC"/>
                     <connections>
                         <outlet property="copyrightLabel" destination="RC0-RL-AQR" id="8xO-Mz-6DY"/>
+                        <outlet property="dateField" destination="bAV-zu-Usy" id="EBc-8U-gbd"/>
                         <outlet property="explanationView" destination="qoE-Uh-qR7" id="irS-QF-kf1"/>
                         <outlet property="mediaView" destination="Hf4-SZ-kfe" id="H35-pt-fUA"/>
                     </connections>

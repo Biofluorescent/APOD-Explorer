@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
     
     let baseAPI = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
     let session = URLSession.shared
@@ -20,28 +20,61 @@ class ViewController: UIViewController {
     @IBOutlet var explanationView: UITextView!
     @IBOutlet var copyrightLabel: UILabel!
     @IBOutlet var mediaView: UIView!
+    @IBOutlet var dateField: UITextField!
     
+    //Create date picker
     let datePicker = UIDatePicker()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "APOD"
+        initializeDatePickerInput(for: dateField)
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInfo))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInfo))
 
         //TO-DO: When loading a date, check if date is saved. If not show save button to save to favorites. Remove when tapped
         //navigationItem.leftBarButtonItem = .none
         
-        
         DispatchQueue.global().async {
-            self.makeRequest(withDate: "2020-09-07")
+            self.makeRequest(withDate: "2020-09-01")
         }
     }
     
+    func initializeDatePickerInput(for field: UITextField) {
+        datePicker.datePickerMode = .date
+        datePicker.timeZone = TimeZone(abbreviation: "PST")
+        //Starting June 16, 1996
+        datePicker.minimumDate = Date(timeIntervalSince1970: 60 * 60 * 24 * 9664)
+        datePicker.maximumDate = Date()
+        
+        //Create toolbar and customize date picker for use with dateField
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dateDonePressed))
+        toolBar.setItems([doneButton], animated: true)
+        
+        field.inputAccessoryView = toolBar
+        field.inputView = datePicker
+        field.sendActions(for: .touchUpInside)
+    }
     
+    @objc func dateDonePressed() {
+        //Formate date chosen
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter.string(from: datePicker.date)
+        //Debug
+        //print(formatter.string(from: datePicker.date))
+        
+        self.view.endEditing(true)
+        
+        DispatchQueue.global().async {
+            self.makeRequest(withDate: dateString)
+        }
+    }
     
     
     func updateUI(data: Astronomy) -> Void {
@@ -63,24 +96,10 @@ class ViewController: UIViewController {
             self.fetchMedia(mediaType: data.media_type, atURL: data.url)
         }
     }
-    
+
+    //To-Do SAVE Functionality
     @objc func saveInfo() {
         
-    }
-    
-    //MARK: TODO: Search functionality
-    func searchDate() {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: nil)
-        toolBar.setItems([doneButton], animated: true)
-        
-        var dateText = UITextField()
-        dateText.inputAccessoryView = toolBar
-        dateText.inputView = datePicker
-        view.addSubview(dateText)
-        dateText.sendActions(for: .touchUpInside)
     }
     
     //MARK: Date Request functionality
@@ -170,6 +189,18 @@ class ViewController: UIViewController {
             
         //FIX: Save video to file. Note does not work with youtube urls
         }else {
+            DispatchQueue.main.async {
+                for view in self.mediaView.subviews {
+                    view.removeFromSuperview()
+                }
+                
+                let webView = WKWebView()
+                webView.frame = CGRect(x: 0, y: 0, width: self.mediaView.frame.width, height: self.mediaView.frame.height)
+                webView.contentMode = .scaleAspectFit
+                self.mediaView.addSubview(webView)
+                webView.load(URLRequest(url: mediaURL))
+            }
+            /*
             let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             //TODO: Fix path component
             let destinationURL = docsURL.appendingPathComponent("Test.mp4")
@@ -210,6 +241,8 @@ class ViewController: UIViewController {
                 }).resume()
                 
             } //End .fileExists else block
+            */
+            
         }//End video media block
     }//End fetchMedia function
     
