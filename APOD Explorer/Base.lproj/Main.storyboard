@@ -78,37 +78,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Hf4-SZ-kfe">
+                            <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Hf4-SZ-kfe">
                                 <rect key="frame" x="0.0" y="88" width="414" height="447"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RC0-RL-AQR">
-                                <rect key="frame" x="414" y="548" width="0.0" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hf4-SZ-kfe" firstAttribute="centerX" secondItem="eOO-DB-Ah7" secondAttribute="centerX" id="5pp-97-dl0"/>
                             <constraint firstItem="Hf4-SZ-kfe" firstAttribute="top" secondItem="ENT-x4-mnw" secondAttribute="top" id="ALQ-RV-7lL"/>
-                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="leading" secondItem="qoE-Uh-qR7" secondAttribute="leading" id="LjS-N4-1Fy"/>
-                            <constraint firstItem="bAV-zu-Usy" firstAttribute="bottom" secondItem="RC0-RL-AQR" secondAttribute="bottom" id="Q7g-Lg-xND"/>
-                            <constraint firstItem="RC0-RL-AQR" firstAttribute="trailing" secondItem="qoE-Uh-qR7" secondAttribute="trailing" id="QWx-iR-pQy"/>
                             <constraint firstItem="Hf4-SZ-kfe" firstAttribute="leading" secondItem="ENT-x4-mnw" secondAttribute="leading" id="QeN-vw-rVl"/>
-                            <constraint firstItem="bAV-zu-Usy" firstAttribute="baseline" secondItem="RC0-RL-AQR" secondAttribute="firstBaseline" id="Ram-8b-8Il"/>
                             <constraint firstItem="bAV-zu-Usy" firstAttribute="top" secondItem="Hf4-SZ-kfe" secondAttribute="bottom" constant="7" id="SA9-bl-Sh3"/>
                             <constraint firstItem="qoE-Uh-qR7" firstAttribute="bottom" secondItem="ENT-x4-mnw" secondAttribute="bottom" id="bEo-RJ-MD8"/>
                             <constraint firstItem="qoE-Uh-qR7" firstAttribute="top" secondItem="bAV-zu-Usy" secondAttribute="bottom" constant="8" id="eLt-sb-Rba"/>
-                            <constraint firstItem="Hf4-SZ-kfe" firstAttribute="trailing" secondItem="RC0-RL-AQR" secondAttribute="trailing" id="mDt-FL-crS"/>
+                            <constraint firstItem="ENT-x4-mnw" firstAttribute="trailing" secondItem="qoE-Uh-qR7" secondAttribute="trailing" id="m2H-4A-aDo"/>
                             <constraint firstItem="bAV-zu-Usy" firstAttribute="leading" secondItem="ENT-x4-mnw" secondAttribute="leading" constant="43" id="qsE-wE-Yce"/>
+                            <constraint firstItem="qoE-Uh-qR7" firstAttribute="leading" secondItem="ENT-x4-mnw" secondAttribute="leading" id="vDm-gB-q7t"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ENT-x4-mnw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Today" id="Wqq-fb-DGC"/>
                     <connections>
-                        <outlet property="copyrightLabel" destination="RC0-RL-AQR" id="8xO-Mz-6DY"/>
                         <outlet property="dateField" destination="bAV-zu-Usy" id="EBc-8U-gbd"/>
                         <outlet property="explanationView" destination="qoE-Uh-qR7" id="irS-QF-kf1"/>
                         <outlet property="mediaView" destination="Hf4-SZ-kfe" id="H35-pt-fUA"/>
@@ -146,21 +136,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6S-Hb-EAR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2238" y="1438"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="p46-PH-EO4">
-            <objects>
-                <viewController id="CiL-Nq-TEh" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mQm-av-t9h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="ZNA-gV-zxf"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Thg-gx-VvJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3043" y="1438"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mlx-t1-3QG">

@@ -18,7 +18,6 @@ class ViewController: UIViewController, UITextViewDelegate {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
     @IBOutlet var explanationView: UITextView!
-    @IBOutlet var copyrightLabel: UILabel!
     @IBOutlet var mediaView: UIView!
     @IBOutlet var dateField: UITextField!
     
@@ -27,7 +26,6 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         title = "APOD"
         initializeDatePickerInput(for: dateField)
         
@@ -37,8 +35,11 @@ class ViewController: UIViewController, UITextViewDelegate {
         //TO-DO: When loading a date, check if date is saved. If not show save button to save to favorites. Remove when tapped
         //navigationItem.leftBarButtonItem = .none
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
         DispatchQueue.global().async {
-            self.makeRequest(withDate: "2020-09-01")
+            self.makeRequest(withDate: formatter.string(from: Date()))
         }
     }
     
@@ -78,10 +79,12 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     
     func updateUI(data: Astronomy) -> Void {
+        var info = data.explanation + "\n\n"
+        
         if let copyright = data.copyright {
-            copyrightLabel.text = copyright
+            info += "© \(copyright)"
         }else {
-            copyrightLabel.text = "Public Domain"
+            info += "Public Domain"
         }
         
         let dates = data.date.components(separatedBy: "-")
@@ -90,7 +93,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
         
         title = data.title
-        explanationView.text = data.explanation
+        explanationView.text = info
+        explanationView.textAlignment = .center
 
         DispatchQueue.global().async {
             self.fetchMedia(mediaType: data.media_type, atURL: data.url)
@@ -175,10 +179,10 @@ class ViewController: UIViewController, UITextViewDelegate {
                             view.removeFromSuperview()
                         }
                         
-                        let imageView = UIImageView()
-                        imageView.image = loadedImage
+                        let imageView = UIImageView(image: loadedImage)
+                        //imageView.translatesAutoresizingMaskIntoConstraints = false
                         imageView.contentMode = .scaleAspectFit
-                        imageView.frame = CGRect(x: 0, y: 0, width: self.mediaView.frame.height, height: self.mediaView.frame.width)
+                        imageView.frame = self.mediaView.bounds
                         self.mediaView.addSubview(imageView)
                     }
                     
