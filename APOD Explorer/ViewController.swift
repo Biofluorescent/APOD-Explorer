@@ -28,8 +28,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         title = "APOD"
         initializeDatePickerInput(for: dateField)
-        
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
+
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInfo))
 
         //TO-DO: When loading a date, check if date is saved. If not show save button to save to favorites. Remove when tapped
@@ -43,6 +42,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    //MARK: UI Functionality
+    
     func initializeDatePickerInput(for field: UITextField) {
         datePicker.datePickerMode = .date
         datePicker.timeZone = TimeZone(abbreviation: "PST")
@@ -50,13 +51,14 @@ class ViewController: UIViewController, UITextViewDelegate {
         datePicker.minimumDate = Date(timeIntervalSince1970: 60 * 60 * 24 * 9664)
         datePicker.maximumDate = Date()
         
-        //Create toolbar and customize date picker for use with dateField
+        //Create toolbar and customize date picker for use with textfield
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dateDonePressed))
         toolBar.setItems([doneButton], animated: true)
         
+        //Assign datepicker to be the input option for the textfield
         field.inputAccessoryView = toolBar
         field.inputView = datePicker
         field.sendActions(for: .touchUpInside)
@@ -67,9 +69,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: datePicker.date)
-        //Debug
-        //print(formatter.string(from: datePicker.date))
-        
+        //Close toolbar
         self.view.endEditing(true)
         
         DispatchQueue.global().async {
@@ -86,12 +86,12 @@ class ViewController: UIViewController, UITextViewDelegate {
         }else {
             info += "Public Domain"
         }
-        
+        /*  Undecided on where to display current date
         let dates = data.date.components(separatedBy: "-")
         if let month = Int(dates[1]) {
             title = "\(months[month - 1]) \(dates[2]), \(dates[0])"
         }
-        
+        */
         title = data.title
         explanationView.text = info
         explanationView.textAlignment = .center
@@ -191,15 +191,15 @@ class ViewController: UIViewController, UITextViewDelegate {
             
             task.resume()
             
-        //FIX: Save video to file. Note does not work with youtube urls
         }else {
+            //Load youtube video in a webview
             DispatchQueue.main.async {
                 for view in self.mediaView.subviews {
                     view.removeFromSuperview()
                 }
                 
                 let webView = WKWebView()
-                webView.frame = CGRect(x: 0, y: 0, width: self.mediaView.frame.width, height: self.mediaView.frame.height)
+                webView.frame = self.mediaView.bounds
                 webView.contentMode = .scaleAspectFit
                 self.mediaView.addSubview(webView)
                 webView.load(URLRequest(url: mediaURL))
@@ -250,6 +250,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         }//End video media block
     }//End fetchMedia function
     
+    //MARK: Future usage?
     
     //Possible future functionality if downloading videos.
     //Note: Cannot download youtube videos
