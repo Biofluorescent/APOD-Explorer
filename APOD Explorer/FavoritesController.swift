@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesController: UITableViewController {
+    
+    var stars: [NSManagedObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,28 +22,47 @@ class FavoritesController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Get the managed context to retrieve from
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Can fetch very specific set of objects but here asking for all Astronomy objects
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Astronomy")
+        
+        //Return managed objects meeting fetch criteria
+        do {
+            stars = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return stars.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
 
-        // Configure the cell...
-
+        let star = stars[indexPath.row]
+        cell.textLabel?.text = star.value(forKey: "title") as? String
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

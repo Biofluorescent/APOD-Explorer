@@ -82,6 +82,17 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="447"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMs-Xs-yyO">
+                                <rect key="frame" x="268" y="544" width="98" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="KnJ-f6-yPe" eventType="touchUpInside" id="sAP-Rl-ylL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -102,6 +113,7 @@
                         <outlet property="dateField" destination="bAV-zu-Usy" id="EBc-8U-gbd"/>
                         <outlet property="explanationView" destination="qoE-Uh-qR7" id="irS-QF-kf1"/>
                         <outlet property="mediaView" destination="Hf4-SZ-kfe" id="H35-pt-fUA"/>
+                        <outlet property="saveButton" destination="BMs-Xs-yyO" id="hkz-38-HaZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHC-vo-9bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

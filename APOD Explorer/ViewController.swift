@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 import WebKit
+import CoreData
 
 class ViewController: UIViewController, UITextViewDelegate {
     
@@ -20,14 +21,18 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var explanationView: UITextView!
     @IBOutlet var mediaView: UIView!
     @IBOutlet var dateField: UITextField!
+    @IBOutlet var saveButton: UIButton!
     
     //Create date picker
     let datePicker = UIDatePicker()
+    var currentStar: Astronomy?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "APOD"
         initializeDatePickerInput(for: dateField)
+        saveButton.layer.borderWidth = 1
+        saveButton.layer.borderColor = UIColor.blue.cgColor
 
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInfo))
 
@@ -100,9 +105,42 @@ class ViewController: UIViewController, UITextViewDelegate {
             self.fetchMedia(mediaType: data.media_type, atURL: data.url)
         }
     }
-
-    //To-Do SAVE Functionality
-    @objc func saveInfo() {
+  
+    //MARK: SAVE Functionality
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
+        save()
+    }
+    
+    func save() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let star = currentStar else { return }
+        
+        //Needed before you can save or retrieve
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Create a new managed object to be inserted into the context
+        let entity = NSEntityDescription.entity(forEntityName: "Astronomy", in: managedContext)!
+        let astronomy = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        //Set attributes
+        astronomy.setValue(star.title, forKey: "title")
+        astronomy.setValue(star.date, forKey: "date")
+        astronomy.setValue(star.explanation, forKey: "explanation")
+        astronomy.setValue(star.url, forKey: "url")
+        astronomy.setValue(star.media_type, forKey: "media_type")
+        
+        //Save data to disk
+        if let copyright = star.copyright {
+            astronomy.setValue(copyright, forKey: "copyright")
+        }else {
+            astronomy.setValue("Public Domain", forKey: "copyright")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
         
     }
     
@@ -151,6 +189,9 @@ class ViewController: UIViewController, UITextViewDelegate {
             //Update UI with retrieved data
             if let data = data {
                 if let star = try? JSONDecoder().decode(Astronomy.self, from: data) {
+                    //Set the currently data, needed for data saving
+                    self.currentStar = star
+                    
                     DispatchQueue.main.async {
                         self.updateUI(data: star)
                     }
@@ -183,6 +224,7 @@ class ViewController: UIViewController, UITextViewDelegate {
                         //imageView.translatesAutoresizingMaskIntoConstraints = false
                         imageView.contentMode = .scaleAspectFit
                         imageView.frame = self.mediaView.bounds
+                        imageView.isUserInteractionEnabled = true
                         self.mediaView.addSubview(imageView)
                     }
                     
