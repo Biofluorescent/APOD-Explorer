@@ -1,14 +1,14 @@
 //
-//  Astronomy.swift
+//  AstronomyJSON.swift
 //  APOD Explorer
 //
-//  Created by Tanner Quesenberry on 9/6/20.
+//  Created by Tanner Quesenberry on 9/16/20.
 //  Copyright © 2020 Tanner Quesenberry. All rights reserved.
 //
 
 import Foundation
 
-struct Astronomy: Codable {
+struct AstronomyJSON: Codable {
     var date: String
     var explanation: String
     var media_type: String

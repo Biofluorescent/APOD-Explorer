@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B509F152505EDBE00D5B2E1 /* Astronomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B509F142505EDBE00D5B2E1 /* Astronomy.swift */; };
 		7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B509F162506ECB700D5B2E1 /* FavoritesController.swift */; };
+		7B875F282512CC4F00DC7B25 /* AstronomyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */; };
+		7B875F2B2512CD0800DC7B25 /* Astronomy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F292512CD0800DC7B25 /* Astronomy+CoreDataClass.swift */; };
+		7B875F2C2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F2A2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift */; };
 		7BF1DA872505EA8900126BA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA862505EA8900126BA7 /* AppDelegate.swift */; };
 		7BF1DA892505EA8900126BA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */; };
 		7BF1DA8B2505EA8900126BA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1DA8A2505EA8900126BA7 /* ViewController.swift */; };
@@ -30,8 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B509F142505EDBE00D5B2E1 /* Astronomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astronomy.swift; sourceTree = "<group>"; };
 		7B509F162506ECB700D5B2E1 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyJSON.swift; sourceTree = "<group>"; };
+		7B875F292512CD0800DC7B25 /* Astronomy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Astronomy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		7B875F2A2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Astronomy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		7BF1DA832505EA8900126BA7 /* APOD Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APOD Explorer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF1DA862505EA8900126BA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,10 +89,12 @@
 		7BF1DA852505EA8900126BA7 /* APOD Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				7B875F292512CD0800DC7B25 /* Astronomy+CoreDataClass.swift */,
+				7B875F2A2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift */,
 				7BF1DA862505EA8900126BA7 /* AppDelegate.swift */,
 				7BF1DA882505EA8900126BA7 /* SceneDelegate.swift */,
 				7BF1DA8A2505EA8900126BA7 /* ViewController.swift */,
-				7B509F142505EDBE00D5B2E1 /* Astronomy.swift */,
+				7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */,
 				7BF1DA8C2505EA8900126BA7 /* Main.storyboard */,
 				7B509F162506ECB700D5B2E1 /* FavoritesController.swift */,
 				7BF1DA922505EA8B00126BA7 /* Assets.xcassets */,
@@ -211,10 +217,12 @@
 			files = (
 				7BF1DA8B2505EA8900126BA7 /* ViewController.swift in Sources */,
 				7BF1DA872505EA8900126BA7 /* AppDelegate.swift in Sources */,
-				7B509F152505EDBE00D5B2E1 /* Astronomy.swift in Sources */,
+				7B875F282512CC4F00DC7B25 /* AstronomyJSON.swift in Sources */,
 				7BF1DA912505EA8900126BA7 /* APOD_Explorer.xcdatamodeld in Sources */,
+				7B875F2C2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift in Sources */,
 				7BF1DA892505EA8900126BA7 /* SceneDelegate.swift in Sources */,
 				7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */,
+				7B875F2B2512CD0800DC7B25 /* Astronomy+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

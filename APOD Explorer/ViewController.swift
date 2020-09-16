@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     //Create date picker
     let datePicker = UIDatePicker()
-    var currentStar: Astronomy?
+    var currentStar: AstronomyJSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    func updateUI(data: Astronomy) -> Void {
+    func updateUI(data: AstronomyJSON) -> Void {
         var info = data.explanation + "\n\n"
         
         if let copyright = data.copyright {
@@ -188,9 +188,17 @@ class ViewController: UIViewController, UITextViewDelegate {
             
             //Update UI with retrieved data
             if let data = data {
-                if let star = try? JSONDecoder().decode(Astronomy.self, from: data) {
+                if var star = try? JSONDecoder().decode(AstronomyJSON.self, from: data) {
                     //Set the currently data, needed for data saving
                     self.currentStar = star
+                    
+                    //Verify url. Error in data for video on 2013-09-16
+                    if !star.url.hasPrefix("https://www.") {
+                        if let range = star.url.range(of: "youtube") {
+                            let end = String(star.url[range.upperBound...])
+                            star.url = "https://www.youtube" + end
+                        }
+                    }
                     
                     DispatchQueue.main.async {
                         self.updateUI(data: star)
@@ -207,8 +215,9 @@ class ViewController: UIViewController, UITextViewDelegate {
     //MARK: Media request/functionality
     
     func fetchMedia(mediaType: String, atURL: String) {
-        let mediaURL = URL(string: atURL)!
         
+        let mediaURL = URL(string: atURL)!
+
         if mediaType == "image" {
             let task = session.dataTask(with: mediaURL) { (data, reponse, error) in
                 if error == nil {
