@@ -5,7 +5,7 @@
 Astronomy Picture of the Day (APOD)
 
 An iOS application that presents data from the NASA APOD API in a mobile friendly way.  
-Users can select and view any previous day's information since the inception of APOD. 
+Users can select and view any previous day's information since the inception of APOD.   
 The currently displayed day can also be saved using Core Data for easy reference later in the Favorites tab.  
 
 (Application currently in progress)
