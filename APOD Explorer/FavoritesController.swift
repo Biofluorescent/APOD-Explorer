@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class FavoritesController: UITableViewController {
+class FavoritesController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var stars: [NSManagedObject] = []
+    var fetchController: NSFetchedResultsController<Astronomy>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,36 +30,84 @@ class FavoritesController: UITableViewController {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        //Can fetch very specific set of objects but here asking for all Astronomy objects
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Astronomy")
+        let fetchRequest: NSFetchRequest<Astronomy> = Astronomy.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
-        //Return managed objects meeting fetch criteria
+        fetchController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchController.delegate = self
+        
         do {
-            stars = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            try fetchController.performFetch()
+        }catch {
+            fatalError("Failed to fetch entities: \(error)")
+        }
+        
+    }
+    
+    //MARK: NSFetchedResultsControllerDelegate Methods
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
         }
     }
+     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
+    }
+     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        if let frc = fetchController {
+            return frc.sections!.count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return stars.count
+        guard let sections = self.fetchController?.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
 
-        let star = stars[indexPath.row]
-        cell.textLabel?.text = star.value(forKey: "title") as? String
+        guard let star = self.fetchController?.object(at: indexPath) else {
+            fatalError("Attempt to configure cell without a managed object")
+        }
         
+        cell.textLabel?.text = star.title
         return cell
     }
     
