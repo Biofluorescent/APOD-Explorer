@@ -117,6 +117,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         
         //Needed before you can save or retrieve
         let managedContext = appDelegate.persistentContainer.viewContext
+        managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         //Create a new managed object to be inserted into the context
         let entity = NSEntityDescription.entity(forEntityName: "Astronomy", in: managedContext)!
