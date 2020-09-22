@@ -124,10 +124,34 @@ class ViewController: UIViewController, UITextViewDelegate {
   
     //MARK: SAVE Functionality
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        save()
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
+        //Make sure there is object to save
+        guard let star = currentStar else { return }
         
+        //Get context
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        //Check if object already saved in core data
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Astronomy")
+        let predicate = NSPredicate(format: "date == %@", star.date)
+        request.predicate = predicate
+        request.fetchLimit = 1
+        
+        do {
+            let count = try managedContext.count(for: request)
+            if count == 0 {
+                //No matching object, can save
+                save()
+            }else {
+                //Object found in core data, inform user they already saved it
+                let ac = UIAlertController(title: "Already saved in favorites", message: nil, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        } catch {
+            print("Could not fetch \(error), \(error.localizedDescription)")
+        }
+
        // let generator = UINotificationFeedbackGenerator()
        // generator.notificationOccurred(.success)
         //UIDevice.vibrate()
@@ -161,6 +185,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         
         do {
             try managedContext.save()
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
