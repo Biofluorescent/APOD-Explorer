@@ -29,12 +29,20 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "APOD"
         initializeDatePickerInput(for: dateField)
+        
         saveButton.layer.borderWidth = 1
-        saveButton.layer.borderColor = UIColor.blue.cgColor
+        saveButton.layer.borderColor = UIColor.white.cgColor
+        saveButton.layer.cornerRadius = 10
 
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInfo))
+        //Attributed string needed to change placeholder text color
+        dateField.attributedPlaceholder = NSAttributedString(string: "Select a date", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        dateField.layer.borderColor = UIColor.white.cgColor
+        dateField.layer.borderWidth = 1
+        dateField.layer.cornerRadius = 10
+        dateField.tintColor = .clear
 
         //TO-DO: When loading a date, check if date is saved. If not show save button to save to favorites. Remove when tapped
         //navigationItem.leftBarButtonItem = .none
@@ -67,6 +75,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         field.inputAccessoryView = toolBar
         field.inputView = datePicker
         field.sendActions(for: .touchUpInside)
+        
+        field.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
     }
     
     @objc func dateDonePressed() {
@@ -82,6 +92,11 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    @objc func textFieldTapped() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
     
     func updateUI(data: AstronomyJSON) -> Void {
         var info = data.explanation + "\n\n"
@@ -91,13 +106,14 @@ class ViewController: UIViewController, UITextViewDelegate {
         }else {
             info += "Public Domain"
         }
-        /*  Undecided on where to display current date
+        //  Undecided on where to display current date
         let dates = data.date.components(separatedBy: "-")
         if let month = Int(dates[1]) {
             title = "\(months[month - 1]) \(dates[2]), \(dates[0])"
         }
-        */
-        title = data.title
+        
+        //title = data.title
+        info = data.title + "\n\n" + info
         explanationView.text = info
         explanationView.textAlignment = .center
 
@@ -109,6 +125,12 @@ class ViewController: UIViewController, UITextViewDelegate {
     //MARK: SAVE Functionality
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         save()
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+       // let generator = UINotificationFeedbackGenerator()
+       // generator.notificationOccurred(.success)
+        //UIDevice.vibrate()
     }
     
     func save() {
@@ -323,3 +345,8 @@ class ViewController: UIViewController, UITextViewDelegate {
 
 }
 
+extension UIDevice {
+    static func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+}

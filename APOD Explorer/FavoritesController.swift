@@ -9,6 +9,16 @@
 import UIKit
 import CoreData
 
+//MARK: Table View Cell
+class AstronomyTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var astronomyImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    var astronomyObject: Astronomy!
+}
+
+//MARK: Table View Controller
 class FavoritesController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchController: NSFetchedResultsController<Astronomy>!
@@ -101,13 +111,18 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath) as! AstronomyTableViewCell
 
         guard let star = self.fetchController?.object(at: indexPath) else {
             fatalError("Attempt to configure cell without a managed object")
         }
         
-        cell.textLabel?.text = star.title
+        cell.dateLabel?.text = star.date
+        cell.titleLabel?.text = star.title
+        cell.astronomyObject = star
+        
+        cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return cell
     }
     
