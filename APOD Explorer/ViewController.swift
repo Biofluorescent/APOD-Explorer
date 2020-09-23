@@ -92,11 +92,11 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    //Fix this, does not work
     @objc func textFieldTapped() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
     }
-    
     
     func updateUI(data: AstronomyJSON) -> Void {
         var info = data.explanation + "\n\n"
@@ -141,7 +141,16 @@ class ViewController: UIViewController, UITextViewDelegate {
             let count = try managedContext.count(for: request)
             if count == 0 {
                 //No matching object, can save
+                //Save image first so table view correctly loads image after save to core data
+                if star.media_type == "image" {
+                    if let imageView = mediaView.subviews[0] as? UIImageView {
+                        if let image = imageView.image {
+                            saveImageToDocumentDirectory(image: image, named: star.date)
+                        }
+                    }
+                }
                 save()
+                
             }else {
                 //Object found in core data, inform user they already saved it
                 let ac = UIAlertController(title: "Already saved in favorites", message: nil, preferredStyle: .alert)
@@ -152,9 +161,6 @@ class ViewController: UIViewController, UITextViewDelegate {
             print("Could not fetch \(error), \(error.localizedDescription)")
         }
 
-       // let generator = UINotificationFeedbackGenerator()
-       // generator.notificationOccurred(.success)
-        //UIDevice.vibrate()
     }
     
     func save() {
@@ -193,12 +199,26 @@ class ViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    func saveImageToDocumentDirectory(image: UIImage, named: String ) {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = named + ".png" // name of the image to be saved
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        //Only save to disk if filename is not already in use
+        if let data = image.jpegData(compressionQuality: 1.0), !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                try data.write(to: fileURL)
+                print("file saved")
+            } catch {
+                print("error saving file:", error)
+            }
+        }
+    }
+    
     //MARK: Date Request functionality
     
     func errorAlert(errorInfo: String) {
         let ac = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
-        
         present(ac, animated: true)
     }
     
@@ -241,7 +261,8 @@ class ViewController: UIViewController, UITextViewDelegate {
                     //Set the currently data, needed for data saving
                     self.currentStar = star
                     
-                    //Verify url. Error in data for video on 2013-09-16
+                    //Verify url. Error in data for video on 2013-09-16.
+                    //To-Do: Refine this safety check for all urls
                     if !star.url.hasPrefix("https://www.") {
                         if let range = star.url.range(of: "youtube") {
                             let end = String(star.url[range.upperBound...])
@@ -369,10 +390,4 @@ class ViewController: UIViewController, UITextViewDelegate {
         })
     }
 
-}
-
-extension UIDevice {
-    static func vibrate() {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-    }
 }

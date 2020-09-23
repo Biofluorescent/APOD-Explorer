@@ -120,7 +120,11 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
         cell.dateLabel?.text = star.date
         cell.titleLabel?.text = star.title
         cell.astronomyObject = star
-        
+        if let image = loadImageFromDocumentDirectory(nameOfImage: star.date + ".png") {
+            cell.astronomyImageView.image = image
+        }else {
+            cell.astronomyImageView.image = UIImage(named: "video")
+        }
         cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return cell
@@ -184,5 +188,19 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: Loading images
+    func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+        if let dirPath = paths.first{
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(nameOfImage)
+            let image = UIImage(contentsOfFile: imageURL.path)
+            return image
+        }
+        //return UIImage.init(named: "default.png")!
+        return nil
+    }
 
 }
