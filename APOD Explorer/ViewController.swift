@@ -106,7 +106,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         }else {
             info += "Public Domain"
         }
-        //  Undecided on where to display current date
+
         let dates = data.date.components(separatedBy: "-")
         if let month = Int(dates[1]) {
             title = "\(months[month - 1]) \(dates[2]), \(dates[0])"

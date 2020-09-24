@@ -22,15 +22,12 @@ class AstronomyTableViewCell: UITableViewCell {
 class FavoritesController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchController: NSFetchedResultsController<Astronomy>!
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,14 +114,27 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
             fatalError("Attempt to configure cell without a managed object")
         }
         
-        cell.dateLabel?.text = star.date
+        let dates = star.date.components(separatedBy: "-")
+        if let month = Int(dates[1]) {
+            cell.dateLabel?.text = "\(months[month - 1]) \(dates[2]), \(dates[0])"
+        }
+        
+        //cell.dateLabel?.text = star.date
         cell.titleLabel?.text = star.title
         cell.astronomyObject = star
+        
+        //Load image or placeholder for videos
         if let image = loadImageFromDocumentDirectory(nameOfImage: star.date + ".png") {
             cell.astronomyImageView.image = image
         }else {
             cell.astronomyImageView.image = UIImage(named: "video")
         }
+        
+        //Shrink text if title too big for label
+        cell.dateLabel.adjustsFontSizeToFitWidth = true
+        cell.dateLabel.minimumScaleFactor = 0.5
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.titleLabel.minimumScaleFactor = 0.5
         cell.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return cell
