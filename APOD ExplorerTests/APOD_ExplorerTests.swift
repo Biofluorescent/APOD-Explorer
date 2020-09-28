@@ -30,5 +30,10 @@ class APOD_ExplorerTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    //Possible tests
+    //JSON is accurate
+    //Proper add and delete on core data
+    //Correct responses received from call to API, correct/incorrect etc
 
 }
