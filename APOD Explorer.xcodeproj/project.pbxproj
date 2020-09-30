@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B509F162506ECB700D5B2E1 /* FavoritesController.swift */; };
+		7B811AD02523E18600B481E0 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B811ACF2523E18600B481E0 /* PresentationViewController.swift */; };
 		7B875F282512CC4F00DC7B25 /* AstronomyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */; };
 		7B875F2B2512CD0800DC7B25 /* Astronomy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F292512CD0800DC7B25 /* Astronomy+CoreDataClass.swift */; };
 		7B875F2C2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B875F2A2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		7B509F162506ECB700D5B2E1 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		7B811ACF2523E18600B481E0 /* PresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationViewController.swift; sourceTree = "<group>"; };
 		7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyJSON.swift; sourceTree = "<group>"; };
 		7B875F292512CD0800DC7B25 /* Astronomy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Astronomy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		7B875F2A2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Astronomy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -96,6 +98,7 @@
 				7BF1DA8A2505EA8900126BA7 /* ViewController.swift */,
 				7B875F272512CC4F00DC7B25 /* AstronomyJSON.swift */,
 				7BF1DA8C2505EA8900126BA7 /* Main.storyboard */,
+				7B811ACF2523E18600B481E0 /* PresentationViewController.swift */,
 				7B509F162506ECB700D5B2E1 /* FavoritesController.swift */,
 				7BF1DA922505EA8B00126BA7 /* Assets.xcassets */,
 				7BF1DA942505EA8B00126BA7 /* LaunchScreen.storyboard */,
@@ -219,6 +222,7 @@
 				7BF1DA872505EA8900126BA7 /* AppDelegate.swift in Sources */,
 				7B875F282512CC4F00DC7B25 /* AstronomyJSON.swift in Sources */,
 				7BF1DA912505EA8900126BA7 /* APOD_Explorer.xcdatamodeld in Sources */,
+				7B811AD02523E18600B481E0 /* PresentationViewController.swift in Sources */,
 				7B875F2C2512CD0800DC7B25 /* Astronomy+CoreDataProperties.swift in Sources */,
 				7BF1DA892505EA8900126BA7 /* SceneDelegate.swift in Sources */,
 				7B509F172506ECB800D5B2E1 /* FavoritesController.swift in Sources */,

@@ -163,15 +163,28 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
         }    
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
+        //Check segue
+        if segue.identifier == "PresentFavorite" {
+            // Get the new view controller using segue.destination.
+            let destinationVC = segue.destination as! PresentationViewController
+            //Get info for selected row
+            if let indexPath = tableView.indexPathForSelectedRow {
+                guard let star = self.fetchController?.object(at: indexPath) else {
+                    fatalError("Unable to get managed object")
+                }
+                //Pass cell data
+                destinationVC.data = star
+            }
+            
+        }
         // Pass the selected object to the new view controller.
     }
-    */
+    
     
     //MARK: Loading images
     func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {
