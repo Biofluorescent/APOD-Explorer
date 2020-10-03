@@ -44,9 +44,6 @@ class ViewController: UIViewController, UITextViewDelegate {
         dateField.layer.cornerRadius = 10
         dateField.tintColor = .clear
 
-        //TO-DO: When loading a date, check if date is saved. If not show save button to save to favorites. Remove when tapped
-        //navigationItem.leftBarButtonItem = .none
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         

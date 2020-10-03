@@ -180,11 +180,8 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
                 //Pass cell data
                 destinationVC.data = star
             }
-            
         }
-        // Pass the selected object to the new view controller.
     }
-    
     
     //MARK: Loading images
     func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {

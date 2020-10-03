@@ -132,7 +132,7 @@
             </objects>
             <point key="canvasLocation" x="1534.7826086956522" y="1437.7232142857142"/>
         </scene>
-        <!--Favorites Controller-->
+        <!--Favorites-->
         <scene sceneID="Med-Aa-40f">
             <objects>
                 <tableViewController id="0ul-H9-VHE" customClass="FavoritesController" customModule="APOD_Explorer" customModuleProvider="target" sceneMemberID="viewController">
@@ -196,13 +196,13 @@
                             <outlet property="delegate" destination="0ul-H9-VHE" id="rTn-Tb-w9A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mZM-gX-ta7"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="mZM-gX-ta7"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6S-Hb-EAR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2237.68115942029" y="1437.7232142857142"/>
         </scene>
-        <!--Presentation View Controller-->
+        <!--APOD-->
         <scene sceneID="RLT-yk-NqO">
             <objects>
                 <viewController id="sX3-y8-cWf" customClass="PresentationViewController" customModule="APOD_Explorer" customModuleProvider="target" sceneMemberID="viewController">
@@ -224,7 +224,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rc6-5a-VtM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dKZ-ZN-RXC"/>
+                    <navigationItem key="navigationItem" title="APOD" id="dKZ-ZN-RXC"/>
                     <connections>
                         <outlet property="mainView" destination="dfs-mg-gW5" id="eRt-xd-s1i"/>
                     </connections>
