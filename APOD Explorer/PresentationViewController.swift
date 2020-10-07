@@ -5,7 +5,6 @@
 //  Created by Tanner Quesenberry on 9/29/20.
 //  Copyright © 2020 Tanner Quesenberry. All rights reserved.
 //
-
 import UIKit
 import WebKit
 
@@ -26,42 +25,18 @@ class PresentationViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: infoButton)
         self.navigationItem.rightBarButtonItem = barButton
         
-        //Needed for comparison later, only want on popup at a time
-        originalSubviewCount = self.view.subviews.count
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         //Set title
         let dates = data.date.components(separatedBy: "-")
         if let month = Int(dates[1]) {
             title = "\(months[month - 1]) \(dates[2]), \(dates[0])"
         }
         
-        //Load image or videos
-        if data.media_type == "image" {
-            if let image = loadImageFromDocumentDirectory(nameOfImage: data.date + ".png") {
-                let imageView = UIImageView(image: image)
-                imageView.frame = mainView.bounds
-                imageView.contentMode = .scaleAspectFit
-                mainView.addSubview(imageView)
-                
-            }else {
-                //Error if unable to find saved image
-                let ac = UIAlertController(title: "Error:", message: "Unable to load image", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                present(ac, animated: true)
-            }
-        }else {
-            //Load video on web
-            let webView = WKWebView()
-            webView.frame = mainView.bounds
-            webView.contentMode = .scaleAspectFit
-            mainView.addSubview(webView)
-            webView.load(URLRequest(url: URL(string: data.url)!))
-        }
+        presentMedia()
         
+        //Needed for comparison later, only want on popup at a time
+        originalSubviewCount = self.view.subviews.count
     }
-    
+
     //MARK: Nav Bar Button Functions
     
     @objc func infoButtonTapped() {
@@ -82,7 +57,40 @@ class PresentationViewController: UIViewController {
 
     }
 
-    //MARK: Loading images
+    //MARK: Loading media
+    
+    func presentMedia() {
+        //Load image or videos
+        if data.media_type == "image" {
+            if let image = loadImageFromDocumentDirectory(nameOfImage: data.date + ".png") {
+                let imageView = UIImageView()
+                imageView.contentMode = .scaleAspectFit
+                imageView.frame = mainView.bounds
+                imageView.image = image
+                mainView.addSubview(imageView)
+                
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                imageView.heightAnchor.constraint(equalTo: mainView.heightAnchor).isActive = true
+                imageView.widthAnchor.constraint(equalTo: mainView.widthAnchor).isActive = true
+                imageView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
+                imageView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
+ 
+            }else {
+                //Error if unable to find saved image
+                let ac = UIAlertController(title: "Error:", message: "Unable to load image", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        }else {
+            //Load video on web
+            let webView = WKWebView()
+            webView.frame = mainView.bounds
+            webView.contentMode = .scaleAspectFit
+            mainView.addSubview(webView)
+            webView.load(URLRequest(url: URL(string: data.url)!))
+        }
+    }
+    
     func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {
         let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
         let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask

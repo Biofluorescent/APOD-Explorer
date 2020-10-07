@@ -217,10 +217,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="dfs-mg-gW5" firstAttribute="trailing" secondItem="rc6-5a-VtM" secondAttribute="trailing" id="1tV-Ih-wqE"/>
                             <constraint firstItem="dfs-mg-gW5" firstAttribute="leading" secondItem="rc6-5a-VtM" secondAttribute="leading" id="M4H-aj-axC"/>
                             <constraint firstItem="dfs-mg-gW5" firstAttribute="top" secondItem="rc6-5a-VtM" secondAttribute="top" id="a4l-YQ-3Sx"/>
                             <constraint firstItem="dfs-mg-gW5" firstAttribute="bottom" secondItem="rc6-5a-VtM" secondAttribute="bottom" id="hdp-j6-dfi"/>
-                            <constraint firstItem="dfs-mg-gW5" firstAttribute="centerX" secondItem="cFp-2x-E48" secondAttribute="centerX" id="p5F-oW-5qa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rc6-5a-VtM"/>
                     </view>
