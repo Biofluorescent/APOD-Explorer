@@ -7,7 +7,7 @@ Astronomy Picture of the Day (APOD)
 For almost 25 years, NASA has graced the world with daily high-resolution astronomy images and videos for public viewing. Ranging from planets to comets, rockets to astronauts, and galaxies to black holes, there's never a shortage of imagery to marvel at on their webstite https://apod.nasa.gov/apod/astropix.html.
 
 This iOS application presents all that available data from the NASA APOD API in a mobile friendly interface.  
-A user can select and view any previous day's information since the inception of APOD. 
+A user can select and view any previous day's information since the inception of APOD.  
 Most days will be an image but sometimes there are videos!   
 If desired, the currently displayed day can also be saved to the favorites tab to be easily viewed later.  
 
