@@ -322,48 +322,6 @@ class ViewController: UIViewController, UITextViewDelegate {
                 self.mediaView.addSubview(webView)
                 webView.load(URLRequest(url: mediaURL))
             }
-            /*
-            let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            //TODO: Fix path component
-            let destinationURL = docsURL.appendingPathComponent("Test.mp4")
-            
-            //Do not download if we already have the content saved
-            if FileManager().fileExists(atPath: destinationURL.path) {
-                print("Already there.")
-                //Play saved media
-                DispatchQueue.main.async {
-                    self.playVideo(from: destinationURL)
-                }
-            }else {
-                var request = URLRequest(url: mediaURL)
-                request.httpMethod = "GET"
-                
-                _ = session.dataTask(with: request, completionHandler:  { data, response, error in
-                    if error != nil {
-                        print("Error happened")
-                        return
-                    }
-                    
-                    if let response = response as? HTTPURLResponse {
-                        if response.statusCode == 200 {
-                            DispatchQueue.main.async {
-                                if let data = data {
-                                    if let _ = try? data.write(to: destinationURL, options: Data.WritingOptions.atomic) {
-                                        print("Data written")
-                                        DispatchQueue.main.async {
-                                            self.playVideo(from: destinationURL)
-                                        }
-                                    }else {
-                                        print("Error writing.")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }).resume()
-                
-            } //End .fileExists else block
-            */
             
         }//End video media block
     }//End fetchMedia function
