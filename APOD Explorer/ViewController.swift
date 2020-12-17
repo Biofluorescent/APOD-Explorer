@@ -61,6 +61,14 @@ class ViewController: UIViewController, UITextViewDelegate {
         datePicker.minimumDate = Date(timeIntervalSince1970: 60 * 60 * 24 * 9664)
         datePicker.maximumDate = Date()
         
+        //Default to original wheels selection. Date Picker changed/updated in recent iOS version.
+        //Only executes on iOS 13.4 or later
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        
         //Create toolbar and customize date picker for use with textfield
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
