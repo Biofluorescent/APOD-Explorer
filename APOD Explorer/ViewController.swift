@@ -54,6 +54,8 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     //MARK: UI Functionality
     
+    /// Creates a tool bar pop up with a date picker for user selection and attaches the functionality to a text field.
+    /// - Parameter field: The text field to apply the changes onto
     func initializeDatePickerInput(for field: UITextField) {
         datePicker.datePickerMode = .date
         datePicker.timeZone = TimeZone(abbreviation: "PST")
@@ -84,8 +86,9 @@ class ViewController: UIViewController, UITextViewDelegate {
         field.addTarget(self, action: #selector(textFieldTapped), for: .touchUpInside)
     }
     
+    /// Used in conjunction with the date picker to format the date and ask for a network request
     @objc func dateDonePressed() {
-        //Formate date chosen
+        //Format date chosen
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: datePicker.date)
@@ -103,6 +106,9 @@ class ViewController: UIViewController, UITextViewDelegate {
         generator.impactOccurred()
     }
     
+    /// Updates the view to reflect the currently selected data. Asks to request the media data
+    /// - Parameter data: AstronomyJSON data
+    /// - Returns: Nothing.
     func updateUI(data: AstronomyJSON) -> Void {
         var info = data.explanation + "\n\n"
         
@@ -204,6 +210,10 @@ class ViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    /// Saves an image to the user's document directory
+    /// - Parameters:
+    ///   - image: The UIImage to be saved
+    ///   - named: The name to use for saving/identifying the image.
     func saveImageToDocumentDirectory(image: UIImage, named: String ) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileName = named + ".png" // name of the image to be saved
@@ -221,12 +231,17 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     //MARK: Date Request functionality
     
+    /// Presents an error alert to the user
+    /// - Parameter errorInfo: The info to be displayed
     func errorAlert(errorInfo: String) {
         let ac = UIAlertController(title: "Error", message: errorInfo, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
     
+    
+    /// Makes a network request to the APOD API and decodes the returned JSON. Makes a call to update the UI
+    /// - Parameter withDate: The date to request data for
     func makeRequest(withDate: String) {
         let date = "&date=" + withDate
         let url = URL(string: baseAPI + date)!
@@ -289,8 +304,11 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     //MARK: Media request/functionality
     
+    /// Makes a network request to obtain an image or load a webview video
+    /// - Parameters:
+    ///   - mediaType: The desired media type, "image" or "video"
+    ///   - atURL: The URL String where the media is located
     func fetchMedia(mediaType: String, atURL: String) {
-        
         let mediaURL = URL(string: atURL)!
 
         if mediaType == "image" {

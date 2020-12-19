@@ -37,6 +37,7 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         
+        //Use NSFecthedResultsController to get updates from the Date selection tab when saving data
         let fetchRequest: NSFetchRequest<Astronomy> = Astronomy.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
@@ -114,12 +115,12 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
             fatalError("Attempt to configure cell without a managed object")
         }
         
+        //Set the date for the cell
         let dates = star.date.components(separatedBy: "-")
         if let month = Int(dates[1]) {
             cell.dateLabel?.text = "\(months[month - 1]) \(dates[2]), \(dates[0])"
         }
         
-        //cell.dateLabel?.text = star.date
         cell.titleLabel?.text = star.title
         cell.astronomyObject = star
         
@@ -184,6 +185,10 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     //MARK: Loading images
+    
+    /// Load a saved image
+    /// - Parameter nameOfImage: String of the image to load, ex: "mountain.png"
+    /// - Returns: The saved UIImage or nil if the image was not found
     func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {
         let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
         let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask

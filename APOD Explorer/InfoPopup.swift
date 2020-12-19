@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This class is used to present a view with a text box in the middle of the screen.
 class InfoPopup: UIView {
     
     fileprivate let textView: UITextView = {

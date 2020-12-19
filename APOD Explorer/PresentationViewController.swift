@@ -39,6 +39,7 @@ class PresentationViewController: UIViewController {
 
     //MARK: Nav Bar Button Functions
     
+    /// Creates a pop-up view with the description of the current Astronomy object data.
     @objc func infoButtonTapped() {
         //Text to display in popup
         var text = "\(data.title)\n\n\(data.explanation)\n\n"
@@ -59,6 +60,7 @@ class PresentationViewController: UIViewController {
 
     //MARK: Loading media
     
+    /// This function loads the saved media for the present Astronomy object. Images are displayed while videos create a WebView to watch.
     func presentMedia() {
         //Load image or videos
         if data.media_type == "image" {
@@ -91,6 +93,10 @@ class PresentationViewController: UIViewController {
         }
     }
     
+    
+    /// Load a saved image
+    /// - Parameter nameOfImage: String of the image to load, ex: "mountain.png"
+    /// - Returns: The saved UIImage or nil if the image was not found
     func loadImageFromDocumentDirectory(nameOfImage : String) -> UIImage? {
         let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
         let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
